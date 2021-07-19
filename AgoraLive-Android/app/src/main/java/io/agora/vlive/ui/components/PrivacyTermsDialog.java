@@ -2,6 +2,7 @@ package io.agora.vlive.ui.components;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.text.method.LinkMovementMethod;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.view.ViewParent;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
@@ -24,13 +26,16 @@ import kotlin.jvm.internal.Intrinsics;
 public class PrivacyTermsDialog {
     private final Context mContext;
     private CheckBox checkBox;
+    private TextView tvTerms;
     private FrameLayout frameLayout;
     private AlertDialog mDialog;
-    private PrivacyTermsDialog.OnPrivacyTermsDialogListener mDialogListener;
+    private OnPrivacyTermsDialogListener mDialogListener;
 
     private void initView() {
         View customView = LayoutInflater.from(this.mContext).inflate(R.layout.dialog_privacy_terms, null);
         this.checkBox = customView.findViewById(R.id.termsCheck);
+        this.tvTerms = customView.findViewById(R.id.tvTerms);
+        tvTerms.setMovementMethod(LinkMovementMethod.getInstance());
         FrameLayout flRoot = new FrameLayout(this.mContext);
         FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
@@ -86,7 +91,7 @@ public class PrivacyTermsDialog {
         }
     }
 
-    public void setPrivacyTermsDialogListener(PrivacyTermsDialog.OnPrivacyTermsDialogListener listener) {
+    public void setPrivacyTermsDialogListener(OnPrivacyTermsDialogListener listener) {
         this.mDialogListener = listener;
     }
 
